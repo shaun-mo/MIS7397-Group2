@@ -1,0 +1,5 @@
+# Keep reviewed text artifacts stable across machines and preserve PDF bytes.
+Milestone2/**/*.md text eol=lf
+Milestone2/**/*.csv text eol=lf
+Milestone2/**/*.json text eol=lf
+Milestone2/**/*.pdf binary

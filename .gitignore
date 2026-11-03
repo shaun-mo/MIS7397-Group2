@@ -54,6 +54,14 @@ ipython_config.py
 data/raw/
 data/private/
 
+# Small reviewed Milestone 2 submission samples are expected course deliverables.
+# Working originals live in the private information hub, not this submission repo.
+!/Milestone2/**/*.csv
+!/Milestone2/**/*.tsv
+!/Milestone2/**/*.xlsx
+!/Milestone2/**/*.xls
+/Milestone2/_incoming/
+
 # ─────────────────────────────────────────────
 # Models & large artifacts
 # ─────────────────────────────────────────────

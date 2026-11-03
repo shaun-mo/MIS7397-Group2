@@ -1,0 +1,10 @@
+case_id,applicant,scenario,difficulty,expected_outcome,expected_flags
+C01,Daniel Whitfield,"Clean file, monthly pay, standard layout",Straightforward,CLEAN,NONE
+C02,Aisha Okonkwo,"Clean file, bi-weekly pay (stated monthly income requires 26/12 conversion), different stub layout",Moderate,CLEAN,NONE
+C03,Tom Brennan,Stated income is higher than pay stub supports,Straightforward,FLAG,INCOME_MISMATCH
+C04,Elena Vasquez,Required bank statement deliberately withheld from test bundle; pay frequency is not printed; balance and monthly income remain unverified,Moderate,FLAG,MISSING_DOCUMENT;LOW_CONFIDENCE_FIELD
+C05,Marcus Lee,Bank statement is from June 2026 - too old for an October application,Moderate,FLAG,STALE_DOCUMENT
+C06,Nadia Hall,Bank statement is in a different person's name (could be a spouse - needs human judgment); pay frequency is not printed and must be verified,Challenging,FLAG,NAME_MISMATCH;LOW_CONFIDENCE_FIELD
+C07,Rachel Kim,"Clean file with name-format variations (middle initial, ALL CAPS) and semi-monthly pay - system must NOT raise a false flag",Challenging,CLEAN,NONE
+C08,Omar Haddad,Degraded image-only scan with visibly smudged gross pay; mandatory review policy even if tentative digits are readable,Expected failure / uncertainty,FLAG,LOW_CONFIDENCE_FIELD
+C09,Luis Ortega,Applicant claims far more in checking than the bank statement shows,Straightforward,FLAG,ASSET_MISMATCH

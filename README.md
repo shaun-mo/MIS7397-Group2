@@ -33,6 +33,8 @@ We are investigating whether **document-grounded data extraction plus inconsiste
 
 ## Repository organization
 
+**Milestone 2:** The [prototype-ready evidence package](Milestone2/README.md) contains synthetic applications and source documents, expected outputs, verification rules, a testing plan, and the initial prototype scope for the November 5 milestone.
+
 ```
 introduction-to-ai-team-2/
 │

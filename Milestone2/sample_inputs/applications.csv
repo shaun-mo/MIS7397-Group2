@@ -1,0 +1,10 @@
+case_id,applicant_name,application_date,employer_name,stated_gross_monthly_income,stated_checking_balance,documents_submitted
+C01,Daniel Whitfield,2026-10-20,Gulf Coast Logistics LLC,5400.00,10258.41,pay_stub;bank_statement
+C02,Aisha Okonkwo,2026-10-20,Bayview Medical Group,5005.00,6041.97,pay_stub;bank_statement
+C03,Tom Brennan,2026-10-20,Lone Star Building Supply Co.,7500.00,13847.50,pay_stub;bank_statement
+C04,Elena Vasquez,2026-10-20,Magnolia Dental Partners,4750.00,5104.21,pay_stub
+C05,Marcus Lee,2026-10-20,Brightpath Analytics LLC,8300.00,26254.16,pay_stub;bank_statement
+C06,Nadia Hall,2026-10-20,Riverbend Veterinary Clinic,4100.00,6200.13,pay_stub;bank_statement
+C07,Rachel Kim,2026-10-20,Summit Ridge Realty Group,6300.00,12804.48,pay_stub;bank_statement
+C08,Omar Haddad,2026-10-20,Redwood Freight Services,5900.00,9240.94,pay_stub;bank_statement
+C09,Luis Ortega,2026-10-20,Pelican Marine Supply,4400.00,15000.00,pay_stub;bank_statement

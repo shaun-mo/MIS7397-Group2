@@ -1,0 +1,973 @@
+{
+  "note": "Evaluator-only synthetic reference; never provide this file to the prototype. Document fields are scalar numbers/text or null; monetary document fields use USD. Application mirrors retain CSV strings. Dates use ISO YYYY-MM-DD. Field readability/review status is separate from mandatory underwriter confirmation of every value. Core scope: four pay-stub fields and three bank-statement fields; no W-2 extraction. C04 bank statement is deliberately withheld from this test bundle; its original remains private. C04/C06 frequency is not stated; C08 gross is held for review under the degraded-field policy.",
+  "cases": {
+    "C01": {
+      "application": {
+        "case_id": "C01",
+        "applicant_name": "Daniel Whitfield",
+        "application_date": "2026-10-20",
+        "employer_name": "Gulf Coast Logistics LLC",
+        "stated_gross_monthly_income": "5400.00",
+        "stated_checking_balance": "10258.41",
+        "documents_submitted": "pay_stub;bank_statement"
+      },
+      "scenario": "Clean file, monthly pay, standard layout",
+      "difficulty": "Straightforward",
+      "documents": {
+        "pay_stub": {
+          "file": "C01_pay_stub.pdf",
+          "fields": {
+            "employee_name": "Daniel Whitfield",
+            "pay_date": "2026-09-30",
+            "pay_frequency": "monthly",
+            "gross_pay_current_period": 5400.0
+          },
+          "path": "sample_inputs/documents/C01_pay_stub.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "employee_name": {
+              "page": 1,
+              "label": "Employee"
+            },
+            "pay_date": {
+              "page": 1,
+              "label": "Pay Date"
+            },
+            "pay_frequency": {
+              "page": 1,
+              "label": "Pay Frequency"
+            },
+            "gross_pay_current_period": {
+              "page": 1,
+              "label": "Gross Pay, Current column"
+            }
+          },
+          "field_status": {
+            "employee_name": "READABLE",
+            "pay_date": "READABLE",
+            "pay_frequency": "READABLE",
+            "gross_pay_current_period": "READABLE"
+          }
+        },
+        "bank_statement": {
+          "file": "C01_bank_statement.pdf",
+          "fields": {
+            "account_holder": "Daniel Whitfield",
+            "statement_period_end": "2026-09-30",
+            "ending_balance": 10258.41
+          },
+          "path": "sample_inputs/documents/C01_bank_statement.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "account_holder": {
+              "page": 1,
+              "label": "Account Holder"
+            },
+            "statement_period_end": {
+              "page": 1,
+              "label": "Statement Period, ending date"
+            },
+            "ending_balance": {
+              "page": 1,
+              "label": "ACCOUNT SUMMARY / Ending Balance"
+            }
+          },
+          "field_status": {
+            "account_holder": "READABLE",
+            "statement_period_end": "READABLE",
+            "ending_balance": "READABLE"
+          }
+        }
+      },
+      "derived": {
+        "monthly_equivalent_gross_income": 5400.0,
+        "status": "CALCULABLE",
+        "monthly_equivalent_note": "Current-period gross x 1; round to cents, half up."
+      },
+      "expected_flags": [],
+      "comparisons": {
+        "income": {
+          "status": "MATCH_BY_RULE",
+          "difference_percent_display": 0.0
+        },
+        "checking_balance": {
+          "status": "MATCH_BY_RULE",
+          "difference_percent_display": 0.0
+        }
+      },
+      "expected_flag_instances": [],
+      "underwriter_confirmation_required": true
+    },
+    "C02": {
+      "application": {
+        "case_id": "C02",
+        "applicant_name": "Aisha Okonkwo",
+        "application_date": "2026-10-20",
+        "employer_name": "Bayview Medical Group",
+        "stated_gross_monthly_income": "5005.00",
+        "stated_checking_balance": "6041.97",
+        "documents_submitted": "pay_stub;bank_statement"
+      },
+      "scenario": "Clean file, bi-weekly pay (stated monthly income requires 26/12 conversion), different stub layout",
+      "difficulty": "Moderate",
+      "documents": {
+        "pay_stub": {
+          "file": "C02_pay_stub.pdf",
+          "fields": {
+            "employee_name": "Aisha Okonkwo",
+            "pay_date": "2026-10-09",
+            "pay_frequency": "biweekly",
+            "gross_pay_current_period": 2310.0
+          },
+          "path": "sample_inputs/documents/C02_pay_stub.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "employee_name": {
+              "page": 1,
+              "label": "Employee Name"
+            },
+            "pay_date": {
+              "page": 1,
+              "label": "Check Date"
+            },
+            "pay_frequency": {
+              "page": 1,
+              "label": "Pay Frequency"
+            },
+            "gross_pay_current_period": {
+              "page": 1,
+              "label": "Total Earnings, THIS PERIOD column"
+            }
+          },
+          "field_status": {
+            "employee_name": "READABLE",
+            "pay_date": "READABLE",
+            "pay_frequency": "READABLE",
+            "gross_pay_current_period": "READABLE"
+          }
+        },
+        "bank_statement": {
+          "file": "C02_bank_statement.pdf",
+          "fields": {
+            "account_holder": "Aisha Okonkwo",
+            "statement_period_end": "2026-09-30",
+            "ending_balance": 6041.97
+          },
+          "path": "sample_inputs/documents/C02_bank_statement.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "account_holder": {
+              "page": 1,
+              "label": "Account Holder"
+            },
+            "statement_period_end": {
+              "page": 1,
+              "label": "Statement Period, ending date"
+            },
+            "ending_balance": {
+              "page": 1,
+              "label": "ACCOUNT SUMMARY / Ending Balance"
+            }
+          },
+          "field_status": {
+            "account_holder": "READABLE",
+            "statement_period_end": "READABLE",
+            "ending_balance": "READABLE"
+          }
+        }
+      },
+      "derived": {
+        "monthly_equivalent_gross_income": 5005.0,
+        "status": "CALCULABLE",
+        "monthly_equivalent_note": "Current-period gross x 26/12; round to cents, half up."
+      },
+      "expected_flags": [],
+      "comparisons": {
+        "income": {
+          "status": "MATCH_BY_RULE",
+          "difference_percent_display": 0.0
+        },
+        "checking_balance": {
+          "status": "MATCH_BY_RULE",
+          "difference_percent_display": 0.0
+        }
+      },
+      "expected_flag_instances": [],
+      "underwriter_confirmation_required": true
+    },
+    "C03": {
+      "application": {
+        "case_id": "C03",
+        "applicant_name": "Tom Brennan",
+        "application_date": "2026-10-20",
+        "employer_name": "Lone Star Building Supply Co.",
+        "stated_gross_monthly_income": "7500.00",
+        "stated_checking_balance": "13847.50",
+        "documents_submitted": "pay_stub;bank_statement"
+      },
+      "scenario": "Stated income is higher than pay stub supports",
+      "difficulty": "Straightforward",
+      "documents": {
+        "pay_stub": {
+          "file": "C03_pay_stub.pdf",
+          "fields": {
+            "employee_name": "Tom Brennan",
+            "pay_date": "2026-09-30",
+            "pay_frequency": "monthly",
+            "gross_pay_current_period": 6200.0
+          },
+          "path": "sample_inputs/documents/C03_pay_stub.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "employee_name": {
+              "page": 1,
+              "label": "Employee"
+            },
+            "pay_date": {
+              "page": 1,
+              "label": "Pay Date"
+            },
+            "pay_frequency": {
+              "page": 1,
+              "label": "Pay Frequency"
+            },
+            "gross_pay_current_period": {
+              "page": 1,
+              "label": "Gross Pay, Current column"
+            }
+          },
+          "field_status": {
+            "employee_name": "READABLE",
+            "pay_date": "READABLE",
+            "pay_frequency": "READABLE",
+            "gross_pay_current_period": "READABLE"
+          }
+        },
+        "bank_statement": {
+          "file": "C03_bank_statement.pdf",
+          "fields": {
+            "account_holder": "Tom Brennan",
+            "statement_period_end": "2026-09-30",
+            "ending_balance": 13847.5
+          },
+          "path": "sample_inputs/documents/C03_bank_statement.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "account_holder": {
+              "page": 1,
+              "label": "Account Holder"
+            },
+            "statement_period_end": {
+              "page": 1,
+              "label": "Statement Period, ending date"
+            },
+            "ending_balance": {
+              "page": 1,
+              "label": "ACCOUNT SUMMARY / Ending Balance"
+            }
+          },
+          "field_status": {
+            "account_holder": "READABLE",
+            "statement_period_end": "READABLE",
+            "ending_balance": "READABLE"
+          }
+        }
+      },
+      "derived": {
+        "monthly_equivalent_gross_income": 6200.0,
+        "status": "CALCULABLE",
+        "monthly_equivalent_note": "Current-period gross x 1; round to cents, half up."
+      },
+      "expected_flags": [
+        "INCOME_MISMATCH"
+      ],
+      "comparisons": {
+        "income": {
+          "status": "FLAG",
+          "difference_percent_display": 20.97
+        },
+        "checking_balance": {
+          "status": "MATCH_BY_RULE",
+          "difference_percent_display": 0.0
+        }
+      },
+      "expected_flag_instances": [
+        {
+          "flag_code": "INCOME_MISMATCH",
+          "document": "pay_stub",
+          "field": "gross_pay_current_period"
+        }
+      ],
+      "underwriter_confirmation_required": true
+    },
+    "C04": {
+      "application": {
+        "case_id": "C04",
+        "applicant_name": "Elena Vasquez",
+        "application_date": "2026-10-20",
+        "employer_name": "Magnolia Dental Partners",
+        "stated_gross_monthly_income": "4750.00",
+        "stated_checking_balance": "5104.21",
+        "documents_submitted": "pay_stub"
+      },
+      "scenario": "Required bank statement deliberately withheld from test bundle; pay frequency is not printed; balance and monthly income remain unverified",
+      "difficulty": "Moderate",
+      "documents": {
+        "pay_stub": {
+          "file": "C04_pay_stub.pdf",
+          "fields": {
+            "employee_name": "Elena Vasquez",
+            "pay_date": "2026-09-30",
+            "pay_frequency": null,
+            "gross_pay_current_period": 4750.0
+          },
+          "path": "sample_inputs/documents/C04_pay_stub.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "employee_name": {
+              "page": 1,
+              "label": "Employee"
+            },
+            "pay_date": {
+              "page": 1,
+              "label": "Pay Date"
+            },
+            "pay_frequency": {
+              "page": 1,
+              "label": "No pay-frequency label is printed on this page"
+            },
+            "gross_pay_current_period": {
+              "page": 1,
+              "label": "Gross Wages"
+            }
+          },
+          "field_status": {
+            "employee_name": "READABLE",
+            "pay_date": "READABLE",
+            "pay_frequency": "NOT_STATED",
+            "gross_pay_current_period": "READABLE"
+          },
+          "field_notes": {
+            "pay_frequency": "A single pay-period window is not evidence of recurring pay frequency; ask a person for documentation."
+          }
+        },
+        "bank_statement": {
+          "file": null,
+          "status": "NOT_SUBMITTED",
+          "fields": {}
+        }
+      },
+      "derived": {
+        "monthly_equivalent_gross_income": null,
+        "status": "UNVERIFIED",
+        "monthly_equivalent_note": "Requires a readable gross amount and documented pay frequency; no application/YTD/W-2 substitution."
+      },
+      "expected_flags": [
+        "MISSING_DOCUMENT",
+        "LOW_CONFIDENCE_FIELD"
+      ],
+      "comparisons": {
+        "income": {
+          "status": "UNVERIFIED",
+          "difference_percent_display": null
+        },
+        "checking_balance": {
+          "status": "UNVERIFIED",
+          "difference_percent_display": null
+        }
+      },
+      "expected_flag_instances": [
+        {
+          "flag_code": "MISSING_DOCUMENT",
+          "document": "bank_statement",
+          "field": "(entire document)"
+        },
+        {
+          "flag_code": "LOW_CONFIDENCE_FIELD",
+          "document": "pay_stub",
+          "field": "pay_frequency"
+        }
+      ],
+      "underwriter_confirmation_required": true
+    },
+    "C05": {
+      "application": {
+        "case_id": "C05",
+        "applicant_name": "Marcus Lee",
+        "application_date": "2026-10-20",
+        "employer_name": "Brightpath Analytics LLC",
+        "stated_gross_monthly_income": "8300.00",
+        "stated_checking_balance": "26254.16",
+        "documents_submitted": "pay_stub;bank_statement"
+      },
+      "scenario": "Bank statement is from June 2026 - too old for an October application",
+      "difficulty": "Moderate",
+      "documents": {
+        "pay_stub": {
+          "file": "C05_pay_stub.pdf",
+          "fields": {
+            "employee_name": "Marcus Lee",
+            "pay_date": "2026-09-30",
+            "pay_frequency": "monthly",
+            "gross_pay_current_period": 8300.0
+          },
+          "path": "sample_inputs/documents/C05_pay_stub.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "employee_name": {
+              "page": 1,
+              "label": "Employee Name"
+            },
+            "pay_date": {
+              "page": 1,
+              "label": "Check Date"
+            },
+            "pay_frequency": {
+              "page": 1,
+              "label": "Pay Frequency"
+            },
+            "gross_pay_current_period": {
+              "page": 1,
+              "label": "Total Earnings, THIS PERIOD column"
+            }
+          },
+          "field_status": {
+            "employee_name": "READABLE",
+            "pay_date": "READABLE",
+            "pay_frequency": "READABLE",
+            "gross_pay_current_period": "READABLE"
+          }
+        },
+        "bank_statement": {
+          "file": "C05_bank_statement.pdf",
+          "fields": {
+            "account_holder": "Marcus Lee",
+            "statement_period_end": "2026-06-30",
+            "ending_balance": 26254.16
+          },
+          "path": "sample_inputs/documents/C05_bank_statement.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "account_holder": {
+              "page": 1,
+              "label": "Account Holder"
+            },
+            "statement_period_end": {
+              "page": 1,
+              "label": "Statement Period, ending date"
+            },
+            "ending_balance": {
+              "page": 1,
+              "label": "ACCOUNT SUMMARY / Ending Balance"
+            }
+          },
+          "field_status": {
+            "account_holder": "READABLE",
+            "statement_period_end": "READABLE",
+            "ending_balance": "READABLE"
+          }
+        }
+      },
+      "derived": {
+        "monthly_equivalent_gross_income": 8300.0,
+        "status": "CALCULABLE",
+        "monthly_equivalent_note": "Current-period gross x 1; round to cents, half up."
+      },
+      "expected_flags": [
+        "STALE_DOCUMENT"
+      ],
+      "comparisons": {
+        "income": {
+          "status": "MATCH_BY_RULE",
+          "difference_percent_display": 0.0
+        },
+        "checking_balance": {
+          "status": "MATCH_BY_RULE",
+          "difference_percent_display": 0.0
+        }
+      },
+      "expected_flag_instances": [
+        {
+          "flag_code": "STALE_DOCUMENT",
+          "document": "bank_statement",
+          "field": "statement_period_end"
+        }
+      ],
+      "underwriter_confirmation_required": true
+    },
+    "C06": {
+      "application": {
+        "case_id": "C06",
+        "applicant_name": "Nadia Hall",
+        "application_date": "2026-10-20",
+        "employer_name": "Riverbend Veterinary Clinic",
+        "stated_gross_monthly_income": "4100.00",
+        "stated_checking_balance": "6200.13",
+        "documents_submitted": "pay_stub;bank_statement"
+      },
+      "scenario": "Bank statement is in a different person's name (could be a spouse - needs human judgment); pay frequency is not printed and must be verified",
+      "difficulty": "Challenging",
+      "documents": {
+        "pay_stub": {
+          "file": "C06_pay_stub.pdf",
+          "fields": {
+            "employee_name": "Nadia Hall",
+            "pay_date": "2026-09-30",
+            "pay_frequency": null,
+            "gross_pay_current_period": 4100.0
+          },
+          "path": "sample_inputs/documents/C06_pay_stub.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "employee_name": {
+              "page": 1,
+              "label": "Employee"
+            },
+            "pay_date": {
+              "page": 1,
+              "label": "Pay Date"
+            },
+            "pay_frequency": {
+              "page": 1,
+              "label": "No pay-frequency label is printed on this page"
+            },
+            "gross_pay_current_period": {
+              "page": 1,
+              "label": "Gross Wages"
+            }
+          },
+          "field_status": {
+            "employee_name": "READABLE",
+            "pay_date": "READABLE",
+            "pay_frequency": "NOT_STATED",
+            "gross_pay_current_period": "READABLE"
+          },
+          "field_notes": {
+            "pay_frequency": "A single pay-period window is not evidence of recurring pay frequency; ask a person for documentation."
+          }
+        },
+        "bank_statement": {
+          "file": "C06_bank_statement.pdf",
+          "fields": {
+            "account_holder": "Gregory Hall",
+            "statement_period_end": "2026-09-30",
+            "ending_balance": 6200.13
+          },
+          "path": "sample_inputs/documents/C06_bank_statement.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "account_holder": {
+              "page": 1,
+              "label": "Account Holder"
+            },
+            "statement_period_end": {
+              "page": 1,
+              "label": "Statement Period, ending date"
+            },
+            "ending_balance": {
+              "page": 1,
+              "label": "ACCOUNT SUMMARY / Ending Balance"
+            }
+          },
+          "field_status": {
+            "account_holder": "READABLE",
+            "statement_period_end": "READABLE",
+            "ending_balance": "READABLE"
+          }
+        }
+      },
+      "derived": {
+        "monthly_equivalent_gross_income": null,
+        "status": "UNVERIFIED",
+        "monthly_equivalent_note": "Requires a readable gross amount and documented pay frequency; no application/YTD/W-2 substitution."
+      },
+      "expected_flags": [
+        "NAME_MISMATCH",
+        "LOW_CONFIDENCE_FIELD"
+      ],
+      "comparisons": {
+        "income": {
+          "status": "UNVERIFIED",
+          "difference_percent_display": null
+        },
+        "checking_balance": {
+          "status": "MATCH_BY_RULE",
+          "difference_percent_display": 0.0
+        }
+      },
+      "expected_flag_instances": [
+        {
+          "flag_code": "NAME_MISMATCH",
+          "document": "bank_statement",
+          "field": "account_holder"
+        },
+        {
+          "flag_code": "LOW_CONFIDENCE_FIELD",
+          "document": "pay_stub",
+          "field": "pay_frequency"
+        }
+      ],
+      "underwriter_confirmation_required": true
+    },
+    "C07": {
+      "application": {
+        "case_id": "C07",
+        "applicant_name": "Rachel Kim",
+        "application_date": "2026-10-20",
+        "employer_name": "Summit Ridge Realty Group",
+        "stated_gross_monthly_income": "6300.00",
+        "stated_checking_balance": "12804.48",
+        "documents_submitted": "pay_stub;bank_statement"
+      },
+      "scenario": "Clean file with name-format variations (middle initial, ALL CAPS) and semi-monthly pay - system must NOT raise a false flag",
+      "difficulty": "Challenging",
+      "documents": {
+        "pay_stub": {
+          "file": "C07_pay_stub.pdf",
+          "fields": {
+            "employee_name": "Rachel Y. Kim",
+            "pay_date": "2026-09-30",
+            "pay_frequency": "semimonthly",
+            "gross_pay_current_period": 3150.0
+          },
+          "path": "sample_inputs/documents/C07_pay_stub.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "employee_name": {
+              "page": 1,
+              "label": "Employee"
+            },
+            "pay_date": {
+              "page": 1,
+              "label": "Pay Date"
+            },
+            "pay_frequency": {
+              "page": 1,
+              "label": "Pay Frequency"
+            },
+            "gross_pay_current_period": {
+              "page": 1,
+              "label": "Gross Pay, Current column"
+            }
+          },
+          "field_status": {
+            "employee_name": "READABLE",
+            "pay_date": "READABLE",
+            "pay_frequency": "READABLE",
+            "gross_pay_current_period": "READABLE"
+          }
+        },
+        "bank_statement": {
+          "file": "C07_bank_statement.pdf",
+          "fields": {
+            "account_holder": "RACHEL Y KIM",
+            "statement_period_end": "2026-09-30",
+            "ending_balance": 12804.48
+          },
+          "path": "sample_inputs/documents/C07_bank_statement.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "account_holder": {
+              "page": 1,
+              "label": "Account Holder"
+            },
+            "statement_period_end": {
+              "page": 1,
+              "label": "Statement Period, ending date"
+            },
+            "ending_balance": {
+              "page": 1,
+              "label": "ACCOUNT SUMMARY / Ending Balance"
+            }
+          },
+          "field_status": {
+            "account_holder": "READABLE",
+            "statement_period_end": "READABLE",
+            "ending_balance": "READABLE"
+          }
+        }
+      },
+      "derived": {
+        "monthly_equivalent_gross_income": 6300.0,
+        "status": "CALCULABLE",
+        "monthly_equivalent_note": "Current-period gross x 2; round to cents, half up."
+      },
+      "expected_flags": [],
+      "comparisons": {
+        "income": {
+          "status": "MATCH_BY_RULE",
+          "difference_percent_display": 0.0
+        },
+        "checking_balance": {
+          "status": "MATCH_BY_RULE",
+          "difference_percent_display": 0.0
+        }
+      },
+      "expected_flag_instances": [],
+      "underwriter_confirmation_required": true
+    },
+    "C08": {
+      "application": {
+        "case_id": "C08",
+        "applicant_name": "Omar Haddad",
+        "application_date": "2026-10-20",
+        "employer_name": "Redwood Freight Services",
+        "stated_gross_monthly_income": "5900.00",
+        "stated_checking_balance": "9240.94",
+        "documents_submitted": "pay_stub;bank_statement"
+      },
+      "scenario": "Degraded image-only scan with visibly smudged gross pay; mandatory review policy even if tentative digits are readable",
+      "difficulty": "Expected failure / uncertainty",
+      "documents": {
+        "pay_stub": {
+          "file": "C08_pay_stub_scan.pdf",
+          "fields": {
+            "employee_name": "Omar Haddad",
+            "pay_date": "2026-09-30",
+            "pay_frequency": "monthly",
+            "gross_pay_current_period": null
+          },
+          "path": "sample_inputs/documents/C08_pay_stub_scan.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "employee_name": {
+              "page": 1,
+              "label": "Employee"
+            },
+            "pay_date": {
+              "page": 1,
+              "label": "Pay Date"
+            },
+            "pay_frequency": {
+              "page": 1,
+              "label": "Pay Frequency"
+            },
+            "gross_pay_current_period": {
+              "page": 1,
+              "label": "Gross Pay, Current column"
+            }
+          },
+          "field_status": {
+            "employee_name": "READABLE",
+            "pay_date": "READABLE",
+            "pay_frequency": "READABLE",
+            "gross_pay_current_period": "REVIEW_REQUIRED"
+          },
+          "field_notes": {
+            "gross_pay_current_period": "Image-only scan with a visibly smudged target field. Digits may be discernible; a tentative 5900.00 candidate is acceptable only if explicitly unverified and held for human review. Do not score it as a trusted extraction or compute verified monthly income."
+          },
+          "evaluator_only_tentative_candidate": {
+            "gross_pay_current_period": 5900.0
+          }
+        },
+        "bank_statement": {
+          "file": "C08_bank_statement.pdf",
+          "fields": {
+            "account_holder": "Omar Haddad",
+            "statement_period_end": "2026-09-30",
+            "ending_balance": 9240.94
+          },
+          "path": "sample_inputs/documents/C08_bank_statement.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "account_holder": {
+              "page": 1,
+              "label": "Account Holder"
+            },
+            "statement_period_end": {
+              "page": 1,
+              "label": "Statement Period, ending date"
+            },
+            "ending_balance": {
+              "page": 1,
+              "label": "ACCOUNT SUMMARY / Ending Balance"
+            }
+          },
+          "field_status": {
+            "account_holder": "READABLE",
+            "statement_period_end": "READABLE",
+            "ending_balance": "READABLE"
+          }
+        }
+      },
+      "derived": {
+        "monthly_equivalent_gross_income": null,
+        "status": "UNVERIFIED",
+        "monthly_equivalent_note": "Requires a readable gross amount and documented pay frequency; no application/YTD/W-2 substitution."
+      },
+      "expected_flags": [
+        "LOW_CONFIDENCE_FIELD"
+      ],
+      "comparisons": {
+        "income": {
+          "status": "UNVERIFIED",
+          "difference_percent_display": null
+        },
+        "checking_balance": {
+          "status": "MATCH_BY_RULE",
+          "difference_percent_display": 0.0
+        }
+      },
+      "expected_flag_instances": [
+        {
+          "flag_code": "LOW_CONFIDENCE_FIELD",
+          "document": "pay_stub",
+          "field": "gross_pay_current_period"
+        }
+      ],
+      "underwriter_confirmation_required": true
+    },
+    "C09": {
+      "application": {
+        "case_id": "C09",
+        "applicant_name": "Luis Ortega",
+        "application_date": "2026-10-20",
+        "employer_name": "Pelican Marine Supply",
+        "stated_gross_monthly_income": "4400.00",
+        "stated_checking_balance": "15000.00",
+        "documents_submitted": "pay_stub;bank_statement"
+      },
+      "scenario": "Applicant claims far more in checking than the bank statement shows",
+      "difficulty": "Straightforward",
+      "documents": {
+        "pay_stub": {
+          "file": "C09_pay_stub.pdf",
+          "fields": {
+            "employee_name": "Luis Ortega",
+            "pay_date": "2026-09-30",
+            "pay_frequency": "monthly",
+            "gross_pay_current_period": 4400.0
+          },
+          "path": "sample_inputs/documents/C09_pay_stub.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "employee_name": {
+              "page": 1,
+              "label": "Employee Name"
+            },
+            "pay_date": {
+              "page": 1,
+              "label": "Check Date"
+            },
+            "pay_frequency": {
+              "page": 1,
+              "label": "Pay Frequency"
+            },
+            "gross_pay_current_period": {
+              "page": 1,
+              "label": "Total Earnings, THIS PERIOD column"
+            }
+          },
+          "field_status": {
+            "employee_name": "READABLE",
+            "pay_date": "READABLE",
+            "pay_frequency": "READABLE",
+            "gross_pay_current_period": "READABLE"
+          }
+        },
+        "bank_statement": {
+          "file": "C09_bank_statement.pdf",
+          "fields": {
+            "account_holder": "Luis Ortega",
+            "statement_period_end": "2026-09-30",
+            "ending_balance": 6214.05
+          },
+          "path": "sample_inputs/documents/C09_bank_statement.pdf",
+          "page": 1,
+          "status": "SUBMITTED",
+          "field_sources": {
+            "account_holder": {
+              "page": 1,
+              "label": "Account Holder"
+            },
+            "statement_period_end": {
+              "page": 1,
+              "label": "Statement Period, ending date"
+            },
+            "ending_balance": {
+              "page": 1,
+              "label": "ACCOUNT SUMMARY / Ending Balance"
+            }
+          },
+          "field_status": {
+            "account_holder": "READABLE",
+            "statement_period_end": "READABLE",
+            "ending_balance": "READABLE"
+          }
+        }
+      },
+      "derived": {
+        "monthly_equivalent_gross_income": 4400.0,
+        "status": "CALCULABLE",
+        "monthly_equivalent_note": "Current-period gross x 1; round to cents, half up."
+      },
+      "expected_flags": [
+        "ASSET_MISMATCH"
+      ],
+      "comparisons": {
+        "income": {
+          "status": "MATCH_BY_RULE",
+          "difference_percent_display": 0.0
+        },
+        "checking_balance": {
+          "status": "FLAG",
+          "difference_percent_display": 141.39
+        }
+      },
+      "expected_flag_instances": [
+        {
+          "flag_code": "ASSET_MISMATCH",
+          "document": "bank_statement",
+          "field": "ending_balance"
+        }
+      ],
+      "underwriter_confirmation_required": true
+    }
+  },
+  "schema_version": "3.0",
+  "scoring": {
+    "declared_fields": 60,
+    "readable_field_denominator": 57,
+    "excluded_fields": [
+      "C04/pay_stub/pay_frequency",
+      "C06/pay_stub/pay_frequency",
+      "C08/pay_stub/gross_pay_current_period"
+    ],
+    "minimum_correct_for_95_percent": 55,
+    "expected_flag_instances": 8,
+    "calculable_monthly_income_cases": [
+      "C01",
+      "C02",
+      "C03",
+      "C05",
+      "C07",
+      "C09"
+    ],
+    "calculable_checking_balance_cases": [
+      "C01",
+      "C02",
+      "C03",
+      "C05",
+      "C06",
+      "C07",
+      "C08",
+      "C09"
+    ]
+  }
+}
