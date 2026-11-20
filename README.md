@@ -33,6 +33,8 @@ We are investigating whether **document-grounded data extraction plus inconsiste
 
 ## Repository organization
 
+**Milestone 3:** The [document-reading prototype and review workbook](Milestone3/README.md) includes the focused extraction instructions, existing pilot results, implementation report, and reproduction steps. Review the short pre-Canvas checklist there before the November 22 submission.
+
 **Milestone 2:** The [prototype-ready evidence package](Milestone2/README.md) contains synthetic applications and source documents, expected outputs, verification rules, a testing plan, and the initial prototype scope for the November 5 milestone.
 
 ```

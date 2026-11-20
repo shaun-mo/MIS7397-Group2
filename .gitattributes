@@ -3,3 +3,6 @@ Milestone2/**/*.md text eol=lf
 Milestone2/**/*.csv text eol=lf
 Milestone2/**/*.json text eol=lf
 Milestone2/**/*.pdf binary
+Milestone3/**/*.md text eol=lf
+Milestone3/**/*.csv text eol=lf
+Milestone3/**/*.xlsx binary

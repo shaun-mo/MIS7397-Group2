@@ -62,6 +62,12 @@ data/private/
 !/Milestone2/**/*.xls
 /Milestone2/_incoming/
 
+# Reviewed Milestone 3 prototype and small evaluator result tables.
+!/Milestone3/LoanReview_Workbook.xlsx
+!/Milestone3/results/pilot_field_results.csv
+!/Milestone3/results/pilot_case_results.csv
+/Milestone3/_incoming/
+
 # ─────────────────────────────────────────────
 # Models & large artifacts
 # ─────────────────────────────────────────────
